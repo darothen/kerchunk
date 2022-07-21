@@ -88,7 +88,7 @@ def scan_grib(
     url,
     common_vars=None,
     storage_options=None,
-    inline_threashold=100,
+    inline_threshold=100,
     skip=0,
     filter={},
 ):
@@ -104,7 +104,7 @@ def scan_grib(
         Names of variables that are common to multiple measurable (i.e., coordinates)
     storage_options: dict
         For accessing the data, passed to filesystem
-    inline_threashold: int
+    inline_threshold: int
         If given, store array data smaller than this value directly in the output
     skip: int
         If non-zero, stop processing the file after this many messages
@@ -163,7 +163,7 @@ def scan_grib(
                         z,
                         ds.variables[var].data,
                         var,
-                        inline_threashold,
+                        inline_threshold,
                         offset,
                         size,
                         attr,
@@ -186,7 +186,7 @@ def scan_grib(
                         z,
                         ds.variables[var].data,
                         var,
-                        inline_threashold,
+                        inline_threshold,
                         offset,
                         size,
                         attr,
@@ -256,7 +256,7 @@ def example_multi(filter={"typeOfLevel": "heightAboveGround", "level": 2}):
     so = {"anon": True, "default_cache_type": "readahead"}
     common = ["time", "step", "latitude", "longitude", "valid_time"]
     for url in files:
-        out = scan_grib(url, common, so, inline_threashold=100, filter=filter)
+        out = scan_grib(url, common, so, inline_threshold=100, filter=filter)
         with open(os.path.basename(url).replace("grib2", "json"), "w") as f:
             json.dump(out, f)
 
